@@ -1,15 +1,15 @@
 (() => {   
-  if (window.location.href == "https://www.e-bebek.com/") { 
+  if (window.location.href == "https://www.e-bebek.com/") {  // Sadece anasayfada çalışması için condition eklendi.
    
 
-    const init = () => { 
+    const init = () => {  // Fonksiyonlar initialize edildi.
       buildHTML();
       buildCSS();
       fetchItems();
       setEvents();
     };
 
-    const buildHTML = () => {   
+    const buildHTML = () => {   // Temel HTML structure oluşturuldu.
       const html = `
         <div class="container">
         <h1 class="title">Beğenebileceğinizi düşündüklerimiz</h1>
@@ -21,7 +21,7 @@
         </div>
       `;
       
-  document.querySelector('eb-product-carousel').insertAdjacentHTML("beforeend", html);     
+  document.querySelector('eb-product-carousel').insertAdjacentHTML("beforeend", html);     // Kodumuz PDFte istenilen yere eklenicek şekilde insert edildi.
       
     };
 
@@ -125,7 +125,7 @@
       document.head.appendChild(style);
     };
 
-    const fetchItems = () => { 
+    const fetchItems = () => {  // GET metodu ile veri çekildi ve çekilen veriler localStorage'a eklendi.
         
       const storedProducts = localStorage.getItem("storedProducts");
 
@@ -145,14 +145,14 @@
       }
     };
 
-    const showItems = (data) => {
+    const showItems = (data) => { // Çekilen veriler kodda görünür hale getirildi.
       const itemContainer = document.querySelector(".items");
       itemContainer.innerHTML = "";
 
       data.forEach(product => {
         let priceDiffHTML = "";
 
-        if (product.original_price == product.price) { 
+        if (product.original_price == product.price) {  // Fiyatlandırmada bir değişiklik olması halinde belirtildi ve indirim yüzdesi gösterildi.
           priceDiffHTML = `<p style="font-size: 25px">${product.original_price}TL</p>`;
         } else {
           const discountPercent = Math.round(100 - ((product.price * 100) / product.original_price));
@@ -191,7 +191,7 @@
 
 
 
-
+   // Toggle ile favori işaretlenmesi, localStorega'a kayıt edilmesi veya çıkarılması kontrolü.
     const kalpler = document.querySelectorAll(".heart");
 
     let favoriler = JSON.parse(localStorage.getItem("favoriler")) || [];
@@ -220,7 +220,7 @@
       });
     };
 
-    const setEvents = () => {
+    const setEvents = () => { // Eventlerin kontrol edildiği fonksiyon.
       const itemContainer = document.querySelector(".items");
       const backBtn = document.querySelector(".btn-backward");
       const forBtn = document.querySelector(".btn-forward");
