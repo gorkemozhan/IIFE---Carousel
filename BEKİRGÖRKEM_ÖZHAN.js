@@ -1,26 +1,15 @@
-/* 
--> Yorum satırlarında yapım aşamasında bilmediğim konuları araştırdığım kaynakların linklerini bırakıyorum
--> Süre kısıtlı olduğu için CSS'i sona bırakmıştım UI olarak biraz zayıf olabilir ve yine aynı sebepten readme dosyası oluşturamadım bunlar dışında istenen maddelerin hepsi çalışıyor.
--> DOM için https://www-w3schools-com.translate.goog/js/js_htmldom_elements.asp?_x_tr_sl=en&_x_tr_tl=tr&_x_tr_hl=tr&_x_tr_pto=tc
--> Teşekkürler, Bekir Görkem Özhan
-*/
-
-(() => {   // Öncelikle bu şekil dosyaların IIFE diye geçtiklerini öğrendim. Normalde önceden hep html içine js gömüp çalışmıştım. Güzel bir tecrübe oldu.
+(() => {   
   if (window.location.href == "https://www.e-bebek.com/") { 
-    /* 
-        ->Pdfteki 3. madde:
-        ->You code should only run in homepage, if user is on any other page you need to console.log “wrong page”.
-        ->https://stackoverflow.com/questions/28394649/check-if-homepage-using-window-location
-    */
+   
 
-    const init = () => { // Fonksiyonları initialize ettiğim yer.
+    const init = () => { 
       buildHTML();
       buildCSS();
       fetchItems();
       setEvents();
     };
 
-    const buildHTML = () => {   // Temel HTML iskeleteni oluşturduğum yer ve Title of the carousel should be “Beğenebileceğinizi düşündüklerimiz” bu taskı yaptığım yer.
+    const buildHTML = () => {   
       const html = `
         <div class="container">
         <h1 class="title">Beğenebileceğinizi düşündüklerimiz</h1>
@@ -33,17 +22,11 @@
       `;
       
   document.querySelector('eb-product-carousel').insertAdjacentHTML("beforeend", html);     
-      // https://stackoverflow.com/questions/13495010/how-to-add-content-to-html-body-using-js
-      // PDFte istenilen yere koymak için siteye girip console'a girip elementin taglerine baktım
+      
     };
 
     const buildCSS = () => { 
-        /* 
-            -> CSS kısmı için takıldığım yerlerde w3schoolstan yardım aldım. bazı baktığım linkler:
-            -> https://www.w3schools.com/cssref/css_colors.php
-            -> https://www.w3schools.com/css/tryit.asp?filename=trycss_border_round 
-
-        */
+        
 
       const css = `
         .container {
@@ -137,22 +120,15 @@
         }
 
       `;
-      const style = document.createElement("style");   // https://medium.com/@vaibhav_55744/how-to-append-css-strings-dynamically-via-javascript-30c4ed4b6cf3
+      const style = document.createElement("style");  
       style.innerHTML = css;
       document.head.appendChild(style);
     };
 
     const fetchItems = () => { 
-        /*
-         Fetch the product list from this link sending a GET request:
-         https://www.youtube.com/watch?v=37vxWr0WgQk  vanilla js APIden veri çekme için yararlandığım kaynak
-         
-         It should retrieve the product list from local storage rather than sending a new fetch request:
-         https://www.youtube.com/watch?v=F8oXuv_vyHE  vanilla js localStorage kullanımı için yararlandığım kaynak   
-        */
+        
       const storedProducts = localStorage.getItem("storedProducts");
 
-        // https://stackoverflow.com/questions/16010827/html5-localstorage-checking-if-a-key-exists localStorage'ın boş olup olmadığını nasıl kontrol ederim kısmı
       if (storedProducts == null) {
         fetch("https://gist.githubusercontent.com/sevindi/8bcbde9f02c1d4abe112809c974e1f49/raw/9bf93b58df623a9b16f1db721cd0a7a539296cf0/products.json",
             {method:"GET"}
@@ -176,7 +152,7 @@
       data.forEach(product => {
         let priceDiffHTML = "";
 
-        if (product.original_price == product.price) { // If “price” and “original_price” are different, show both price like in the example and also calculate the discount amount and show it as well.
+        if (product.original_price == product.price) { 
           priceDiffHTML = `<p style="font-size: 25px">${product.original_price}TL</p>`;
         } else {
           const discountPercent = Math.round(100 - ((product.price * 100) / product.original_price));
@@ -192,7 +168,7 @@
         const card = document.createElement("div");
         card.className = "card";
 
-        // When a user clicks on a product, the respective product page should open in a new tab. <a></a> taginin içinde
+        
         card.innerHTML = `
           
           <img src="${product.img}">
@@ -214,13 +190,7 @@
 
 
 
-/*
-When user clicks on the heart icon should fill it with orange color, and this
-preference should be stored in the local storage in an array.
-Products marked as favorites before are displayed with filled heart icons.
 
-js localstorage toggle -> https://www.google.com/search?q=js+localstorage+toggle
-*/
 
     const kalpler = document.querySelectorAll(".heart");
 
@@ -233,7 +203,7 @@ js localstorage toggle -> https://www.google.com/search?q=js+localstorage+toggle
 
     kalp.addEventListener("click", () => {
         if (favoriler.includes(index)) {
-            favoriler.splice(favoriler.indexOf(index), 1);  // https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array-in-javascript
+            favoriler.splice(favoriler.indexOf(index), 1); 
             kalp.textContent = "♡";
         } else {
             favoriler.push(index);
@@ -256,7 +226,7 @@ js localstorage toggle -> https://www.google.com/search?q=js+localstorage+toggle
       const forBtn = document.querySelector(".btn-forward");
 
 
-      // Carousel buton ile kaydırma kısmında yararlandığım kaynak: https://webdesign.tutsplus.com/how-to-build-a-simple-carousel-with-vanilla-javascript--cms-41734t
+   
 
       forBtn.addEventListener("click", () => {
         itemContainer.scrollLeft += itemContainer.clientWidth;
