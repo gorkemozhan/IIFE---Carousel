@@ -23,7 +23,7 @@ Proje hazırlanırken özellikle IIFE kullanımı, localStorage yönetimi ve car
 
 ## ▶️ Çalıştırma
 1. Proje dosyaları klonlanır veya indirilir.
-2. `index.html` tarayıcıda açılır.
+2. .js dosyası kopyalanarak tarayıcının consoluna yapıştırılır ve run edilir.
 3. Kod yalnızca belirtilen alan adı üzerinde aktiftir; test ortamında `console.log("wrong page")` çıktısı görülebilir.
 
 ---
